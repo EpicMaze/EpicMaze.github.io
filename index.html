@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> Practise 4 | Javascript </title>
+        <link rel="stylesheet" href="static/css/styles.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <div class="selector-container">
+                <h1> Select the type of script  </h1>
+
+                <form class="script-selector">
+                    <h3> Type of script </h3>
+                    <select id="scriptSelect">
+                        <option value="fizzbuzz"> FizzBuzz </option>
+                        <option value="fibonacci"> Fibonacci </option>
+                        <option value="prime_gen"> Prime </option>
+                    </select>
+                    <h3> Length of numbers </h3>
+                    <input id="lenSelector" type="number" min="10" max="1000" value="100">
+                    <button type="button" class="submit-button" onclick="scriptSelector(lenSelector.value);"> Go </button>
+
+                </form>
+            </div>
+            <div class="results-container" id="resultArea">
+                
+            </div>
+
+        </div>
+        
+        
+
+        
+
+        <script>
+            // FizzBuzz
+            function FizzBuzz(n) {
+
+                let res = [];
+
+                for (let i = 1; i <= n; i++) {
+                    if (i % 3 == 0) res.push('Fizz');
+                    else if (i % 5 == 0) res.push('Buzz');
+                    else if (i % 15 == 0) res.push('FizzBuzz');     // if divisible by 15 == divisible by 5 and 3
+                    else res.push(i);
+                }
+
+                return res;
+            }
+            
+
+            function Fibonacci(n) {
+                let fibonaci = [0, 1]
+                for (let i = 0; i <= n-1; i++) {
+                    let new_num = fibonaci[i] + fibonaci[i+1]
+                    // console.log(new_num);
+                    fibonaci.push(new_num);
+                }
+                return fibonaci;
+            }
+
+
+            function Primes(n) {
+                // Super inefficient (slow) algorithm
+                function is_prime(number) {
+                    if (number <= 3) {
+                        return number > 1
+                    }
+
+                    for (let i = 2; i < number; i++) {
+                        if (number % i == 0) {
+                            return false;
+                        }
+                    }
+                    return true;
+
+                }
+
+                let prime_numbers = [];
+                for (let i = 1; i < n; i++) {
+                    if (is_prime(i)) {
+                        prime_numbers.push(i)
+                    }
+                }
+
+                return prime_numbers;
+            }
+
+
+            // Script selector
+            var scripts = ['fizzbuzz', 'fibonacci', 'prime_gen'];
+            var script_result;
+            function scriptSelector(n) {
+                let selected = document.getElementById("scriptSelect").value;
+                // Very bad constructor but still better than using eval()
+                if (selected == scripts[0]) script_result = FizzBuzz(n);
+                else if (selected == scripts[1]) script_result = Fibonacci(n);
+                else script_result = Primes(n);
+
+                // Inserting into DOM Tree
+
+                let results_dom = document.getElementById("resultArea");
+                results_dom.innerHTML = script_result;
+
+            }
+
+        </script>
+
+        <!-- <script type="text/javascript" src="static/js/prime_gen.js"></script>    -->
+        <!-- <script type="text/javascript" src="static/js/fibonacci.js"></script> -->
+        <!-- <script type="text/javascript" src="static/js/fizzbuzz.js"></script> -->
+        <!-- <script type="text/javascript" src="static/js/script.js"></script> -->
+    </body>
+</html>
