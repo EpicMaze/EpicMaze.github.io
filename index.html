@@ -46,9 +46,9 @@
                 let res = [];
 
                 for (let i = 1; i <= n; i++) {
-                    if (i % 3 == 0) res.push('Fizz');
+                    if (i % 15 == 0) res.push('FizzBuzz');     // if divisible by 15 == divisible by 5 and 3
+                    else if (i % 3 == 0) res.push('Fizz');
                     else if (i % 5 == 0) res.push('Buzz');
-                    else if (i % 15 == 0) res.push('FizzBuzz');     // if divisible by 15 == divisible by 5 and 3
                     else res.push(i);
                 }
 
